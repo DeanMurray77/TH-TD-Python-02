@@ -63,11 +63,12 @@ def export_team(players_dict):
 def create_welcome_letters(players_dict):
     if not os.path.exists(OUTPUT_DIRECTORY):
         os.mkdir(OUTPUT_DIRECTORY)
-        
+
     for team in players_dict:
         for players in players_dict[team]:
             childs_name_as_file_name = format_childs_name(players[0])
-            full_path_file_name = OUTPUT_DIRECTORY + "/" + childs_name_as_file_name
+            full_path_file_name = OUTPUT_DIRECTORY + "/"
+            full_path_file_name += childs_name_as_file_name
             with open(full_path_file_name, 'w') as file:
                 file.write('Dear ' + players[2] + ',\n\n')
                 file.write("We're happy to announce that your child," +
