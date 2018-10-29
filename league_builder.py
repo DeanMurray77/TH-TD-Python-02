@@ -1,4 +1,5 @@
 import operator
+import os
 
 
 def import_players(file_name):
@@ -60,10 +61,14 @@ def export_team(players_dict):
 
 
 def create_welcome_letters(players_dict):
+    if not os.path.exists(OUTPUT_DIRECTORY):
+        os.mkdir(OUTPUT_DIRECTORY)
+        
     for team in players_dict:
         for players in players_dict[team]:
             childs_name_as_file_name = format_childs_name(players[0])
-            with open(childs_name_as_file_name, 'w') as file:
+            full_path_file_name = OUTPUT_DIRECTORY + "/" + childs_name_as_file_name
+            with open(full_path_file_name, 'w') as file:
                 file.write('Dear ' + players[2] + ',\n\n')
                 file.write("We're happy to announce that your child," +
                            players[0] +
@@ -94,6 +99,7 @@ def remove_heights(players_dict):
 if __name__ == '__main__':
     PLAYER_FILE = "soccer_players.csv"
     TEAM_FILE = 'teams.txt'
+    OUTPUT_DIRECTORY = 'outputs'
 
     roster = import_players(PLAYER_FILE)
 
